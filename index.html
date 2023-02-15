@@ -1,1 +1,81 @@
-                                    Nil Benimle Sewgili Olurmusun?
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "icon.png">
+    <title>GarticBot</title>
+</head>
+<style>
+    body{
+       background-color: black;
+    }
+    .cont
+    {
+        text-align: center;
+        border-top-width: 50px;
+
+    }
+    p
+    {
+        text-align:center;
+        color:white;
+        font-size:30px;
+    }
+    .Attack
+    {
+        width: 500px;
+        background-color: red;
+    }
+</style>
+<body>
+    <div class="cont">
+        <p><i>Gartic Bot</i></p>
+        <input id="input1" style="color:white;background-color: black;" placeholder="Url/BaÄŸlantÄ±" type="text">
+        <input id="input2" style="color:white;background-color: black;" placeholder="OluÅŸturulacak Bot MiktarÄ±" type="text">
+        <input id="input3" style="color:white;background-color: black;" placeholder="Sayfa YÃ¼ksekliÄŸi" type="text">
+        <input id="input4" style="color:white;background-color: black;" placeholder="Sayfa GeniÅŸliÄŸi" type="text"> <br> <br>
+        <button id="Connection" style="width: 300px; height: 35px;font-size: 20px;color:red;background-color: powderblue;"><u>OluÅŸtur</u></button> <br> <br>
+        
+        <br>
+        <span id="C1"></span>
+    </div>
+    <br>
+    <div id="botlar" style="text-align: center;">
+    
+    </div>
+    <div style="text-align: center;"><br><a id="mirza" href="#" hidden style="color: white; text-decoration: none;">Can Klc Â©</a></div>
+    <script>
+        document.querySelector("#Connection").addEventListener("click",botAt);
+        
+
+        function botAt() {
+            var t = document.querySelector("#input1").value;
+            var d = document.querySelector("#input2").value;
+                if(t.length == 0)
+                {
+                    alert("LÃ¼tfen \"Link\" KÄ±smÄ±nÄ± BoÅŸ BÄ±rakmayÄ±nÄ±z.");
+                }else if(d.length == 0)
+                {
+                    alert("LÃ¼tfen \"Bot Miktar\" KÄ±smÄ±nÄ± BoÅŸ BÄ±rakmayÄ±nÄ±z.");
+                }else if(t.indexOf("www.croxyproxy.com")>-1)
+                {
+                    alert("Dostum? Sen Benim Sitemi Ã‡Ã¶kertmeyemi Ã‡alÄ±ÅŸÄ±yorsun!");
+                    //
+                }
+                else{
+                    for (let index = 0; index < document.querySelector("#input2").value; index++) {
+                let bot = document.createElement('iframe');
+                bot.src = document.querySelector("#input1").value;
+                bot.width = document.querySelector("#input4").value;
+                bot.height = document.querySelector("#input3").value;
+                document.querySelector("#C1").hidden = false;
+                document.querySelector("#mirza").hidden = false;
+                document.querySelector("#botlar").appendChild(bot);
+                }
+            }
+        }
+    </script>
+</body>
+</html>v

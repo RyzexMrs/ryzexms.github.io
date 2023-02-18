@@ -25,11 +25,8 @@
 		<input type="text" id="rm" placeholder="7100">
 		<input type="text" id="nck" placeholder="mozart">
 	</div>
-	<div>
-		<input type="text" id="tl" placeholder="atilacaq userler" style="width: 380px">
-	</div>
 	<div id="bb" style="margin-top: 0.5rem;">
-		<button onclick="otagagir(document.getElementById('srv').value,document.getElementById('rm').value,document.getElementById('tl').value.split(','), document.getElementById('nck').value)" id="bt">Gir</button>
+		<button onclick="otagagir(document.getElementById('srv').value,document.getElementById('rm').value, document.getElementById('nck').value)" id="bt">Gir</button>
 	</div>
 <script>
 	let ps = [];
@@ -37,7 +34,12 @@
 
 	let ws = '';
 
-	function otagagir(server, otaq, wkd, nick){
+	let x;
+
+	function otagagir(server, otaq, nick){
+		if(ws != '' && ws.readyState == 1){
+			ws.close();
+		}
 		ws = new WebSocket(`wss://server0${server}.gartic.io/socket.io/?EIO=3&transport=websocket`);
 
 		ws.onopen = () => {
@@ -51,12 +53,16 @@
 				ts = d[2];
 				ps = d[5];
 			}
-			console.log(wkd);
-			console.log(ps);
-			for(let i = 0; i < wkd.length; i++){
-		 		ws.send(`42[45,${ts},["${ps.filter(a => a.nick == wkd[i])[0].id}",true]]`);
+			if(d[0] == 11){
+				x = d[2];
+				if(x != ''){
+					ws.send(`42[45,${ts},["${ps.filter(a => a.nick == x)[0].id}",true]]`);
+					x = '';
+				}
 			}
 		}
+
+		
 		
 		setInterval(() => {
 			ws.send(`2`);

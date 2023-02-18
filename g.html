@@ -7,9 +7,9 @@
 	<style type="text/css">
 		*{box-sizing: border-box;}
 		body{background: #111;text-align: center;color: #eee;font-family: sans-serif;}
-		#srv{width: 100px}
+		#srv, #nck, #rm{width: 150px}
 		input,button{font-size: 18px;padding: 10px 14px;border-radius: 6px;text-align: center;border: none;background-color: transparent;border: 2px solid #aaa;color: #eee;margin-bottom: 10px}
-		#grid{display: grid;grid-template-columns: repeat(2, auto);width: 380px;margin: 0 auto;}
+		#grid{display: grid;grid-template-columns: repeat(3, auto);width: 440px;margin: 0 auto;}
 		small{margin-bottom: 4px;font-size: 14px}
 		button{background-color: #6096B4;width: 380px;border: none;}
 		hr{width: 420px;border: none;height: 1px;background-color: #aaa;}
@@ -20,39 +20,41 @@
 	<div id="grid">
 		<small>Server</small>
 		<small>Otaq</small>
+		<small>Nick</small>
 		<input type="text" id="srv" placeholder="5" value="5">
 		<input type="text" id="rm" placeholder="7100">
+		<input type="text" id="nck" placeholder="mozart">
 	</div>
 	<div>
 		<input type="text" id="tl" placeholder="atilacaq userler" style="width: 380px">
 	</div>
 	<div id="bb" style="margin-top: 0.5rem;">
-		<button onclick="otagagir(document.getElementById('srv').value,document.getElementById('rm').value,document.getElementById('tl').value.split(','))" id="bt">Gir</button>
+		<button onclick="otagagir(document.getElementById('srv').value,document.getElementById('rm').value,document.getElementById('tl').value.split(','), document.getElementById('nck').value)" id="bt">Gir</button>
 	</div>
 <script>
-	let otaqd = [];
-	let vaxt;
+	let ps = [];
+	let ts;
 
 	let ws = '';
 
-	function otagagir(server, otaq, willbekicked){ 
+	function otagagir(server, otaq, wkd, nick){
 		ws = new WebSocket(`wss://server0${server}.gartic.io/socket.io/?EIO=3&transport=websocket`);
 
 		ws.onopen = () => {
-			ws.send(`42[3,{"v":20000,"nick":"mozart${(Math.floor(Math.random() * 9999))}","avatar":0,"sala":"${otaq}"}]`);
+			ws.send(`42[3,{"v":20000,"nick":"${nick} ${Math.floor(Math.random() * 9999)}","avatar":"","sala":"${otaq}"}]`);
 			ws.send(`42[46,1675119253574]`);
 		}
 
 		ws.onmessage = (m) => {
 			const d = JSON.parse(m.data.slice(2));
 			if(d[0] == 5){
-				vaxt = d[2];
-				otaqd = d[5];
+				ts = d[2];
+				ps = d[5];
 			}
-			console.log(willbekicked);
-			console.log(otaqd);
-			for(let i = 0; i < willbekicked.length; i++){
-		 		ws.send(`42[45,${vaxt},["${otaqd.filter(a => a.nick == willbekicked[i])[0].id}",true]]`);
+			console.log(wkd);
+			console.log(ps);
+			for(let i = 0; i < wkd.length; i++){
+		 		ws.send(`42[45,${ts},["${ps.filter(a => a.nick == wkd[i])[0].id}",true]]`);
 			}
 		}
 		

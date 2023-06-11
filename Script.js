@@ -4,11 +4,11 @@ document.body.innerHTML += `
   <div class="ui inverted form">
     <div class="two fields">
 	<div class="field" id="botname">
-        <label>Bot Name</label>
-        <div class="ui large labeled input"><input type="text" value="${params.get('name') || "mikey"}" placeholder="Nickname" maxlength="17" spellcheck="false" data-ms-editor="true"></div>
+        <label>Name</label>
+        <div class="ui large labeled input"><input type="text" value="${params.get('name') || "Ryzex"}" placeholder="Nickname" maxlength="17" spellcheck="false" data-ms-editor="true"></div>
       </div>
       <div class="field">
-        <label>Room Code</label>
+        <label>Room</label>
         <div class="ui large action labeled input" id="roomcode"><div class="ui label">https://gartic.io/ </div><input type="text" value="${params.get('code') || ""}" placeholder="Code"><button id="search" class="ui pink right labeled icon button" data-inverted="" data-tooltip="Take a Look at The Rooms" data-position="bottom center">
         <i class="search icon"></i>
         Rooms
@@ -159,7 +159,7 @@ inverted button"><i class="fire icon"></i>V1 (Old Version)</a></div> </div>
   </div></div>
 </div>
 
-<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || ":D"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
+<div class="field"><div class="ui labeled input" id="messagetext"><input type="text" value="${params.get('message-text') || "discord.gg/bizbizeyiz"}" placeholder="Message text" maxlength="1000" spellcheck="false" data-ms-editor="true"></div></div><div class="field">
 <button class="ui primary button" id="send">Send Message</button></div>
 </div>
 
